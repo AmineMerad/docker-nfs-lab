@@ -1,0 +1,42 @@
+NFS Docker Project
+This project sets up an NFS server and client using Docker containers, demonstrating basic file sharing and security with TCP Wrappers.
+Prerequisites
+
+Docker and Docker Compose installed
+Basic knowledge of Docker and NFS
+
+Setup
+
+Clone the repository:git clone https://github.com/yourusername/your-repo.git
+cd your-repo
+
+
+Build and start the containers:docker-compose up --build
+
+
+
+Testing
+
+Access the client container:docker exec -it nfs-client bash
+
+
+Mount the NFS share:mkdir /mnt/partage
+mount 192.168.100.2:/home/partage /mnt/partage
+
+
+Test file operations:
+Create a file: echo "Hello from client" > /mnt/partage/test.txt
+Verify on server: docker exec -it nfs-server bash and cat /home/partage/test.txt
+
+
+Check mounts:mount | grep nfs
+
+
+
+Notes
+
+Ensure the subnet in docker-compose.yml doesn’t conflict with your network.
+Adjust IP addresses if needed.
+
+License
+MIT License

@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  nfs-server:
+    build:
+      context: ./nfs-server
+    container_name: nfs-server
+    privileged: true  # Required for NFS services
+    ports:
+      - "2049:2049"  # NFS port (optional for host access, not needed for internal network)
+    networks:
+      nfs-net:
+        ipv4_address: 172.20.0.2
+
+  nfs-client:
+    build:
+      context: ./nfs-client
+    container_name: nfs-client
+    depends_on:
+      - nfs-server
+    privileged: true  # Required for mounting
+    networks:
+      nfs-net:
+        ipv4_address: 172.20.0.3
+
+networks:
+  nfs-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
