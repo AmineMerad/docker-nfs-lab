@@ -7,8 +7,8 @@ Basic knowledge of Docker and NFS
 
 Setup
 
-Clone the repository:git clone https://github.com/yourusername/your-repo.git
-cd your-repo
+Clone the repository:git clone https://github.com/AmineMerad/docker-nfs-lab.git
+cd docker-nfs-lab
 
 
 Build and start the containers:docker-compose up --build
@@ -38,5 +38,3 @@ Notes
 Ensure the subnet in docker-compose.yml doesn’t conflict with your network.
 Adjust IP addresses if needed.
 
-License
-MIT License
