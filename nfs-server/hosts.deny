@@ -1,3 +1,2 @@
-rpcbind: ALL
-mountd: ALL
-statd: ALL
+# hosts.deny
+ALL: ALL

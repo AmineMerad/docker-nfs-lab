@@ -1,1 +1,1 @@
-/home/partage 172.20.0.3(rw,sync)
+/home/partage 10.5.0.0/16(rw,sync,no_subtree_check,no_root_squash,fsid=0)

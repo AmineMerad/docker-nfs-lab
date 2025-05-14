@@ -1,16 +1,20 @@
-version: "3"
-
 services:
   nfs-server:
     build:
       context: ./nfs-server
     container_name: nfs-server
-    privileged: true  # Required for NFS services
+    privileged: true
     ports:
-      - "2049:2049"  # NFS port (optional for host access, not needed for internal network)
+      - "2049:2049"     # NFS
+      - "11111:111"       # portmapper
+      - "11111:111/udp"   # portmapper
+      - "32765:32765"   # mountd
+      - "32765:32765/udp" # mountd
+      - "32767:32767"   # status
+      - "32767:32767/udp" # status
     networks:
       nfs-net:
-        ipv4_address: 172.20.0.2
+        ipv4_address: 10.5.0.2
 
   nfs-client:
     build:
@@ -18,14 +22,14 @@ services:
     container_name: nfs-client
     depends_on:
       - nfs-server
-    privileged: true  # Required for mounting
+    privileged: true
     networks:
       nfs-net:
-        ipv4_address: 172.20.0.3
+        ipv4_address: 10.5.0.3
 
 networks:
   nfs-net:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.20.0.0/16
+        - subnet: 10.5.0.0/16
